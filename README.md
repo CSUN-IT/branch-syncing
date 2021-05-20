@@ -7,7 +7,7 @@ A simple GitHub Action that will keep two branches in sync.
 Simply specify the source branch (the authoritative branch) and the destination branch (the branch that will be updated).
 
 ```yaml
-- uses: CSUN-IT/branch-syncing
+- uses: CSUN-IT/branch-syncing@v1
   with:
     source: master
     destination: sync
