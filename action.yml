@@ -22,6 +22,7 @@ runs:
       env:
         GH_TOKEN: ${{ inputs.token }}
       run: |
+        gh auth login
         gh repo clone ${{ inputs.repository }} workspace
         cd workspace
         git switch ${{ inputs.destination }}
