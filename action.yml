@@ -23,6 +23,7 @@ runs:
         GH_TOKEN: ${{ inputs.token }}
       run: |
         gh repo clone ${{ inputs.repository }} workspace
+        cd workspace
         git switch ${{ inputs.destination }}
         git merge --ff-only ${{ inputs.source }}
         git push -u origin ${{ inputs.destination }}
