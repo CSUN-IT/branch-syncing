@@ -1,0 +1,14 @@
+name: Example Usage
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
+        with:
+          source: master
+          destination: sync

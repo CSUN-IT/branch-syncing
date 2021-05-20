@@ -1,0 +1,28 @@
+name: Branch Syncing
+description: Keep multiple branches in sync
+inputs:
+  token:
+    required: true
+    description: The GitHub PAT needed to push to these branches
+    default: ${{ github.token }}
+  repository:
+    required: true
+    description: Repository name with owner. For example, `csun-it/branch-syncing`
+    default: ${{ github.repository }}
+  source:
+    required: true
+    description: The branch that will serve as the point of truth
+  destination:
+    required: true
+    description: The branch to keep in sync with `source`
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+      run: |
+        gh repo clone ${{ inputs.repository }} workspace
+        git checkout --track ${{ inputs.destination }}
+        git merge --ff-only ${{ inputs.source }}
+        git push -u origin ${{ inputs.destination }}
