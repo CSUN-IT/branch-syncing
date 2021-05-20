@@ -22,9 +22,11 @@ runs:
       env:
         GH_TOKEN: ${{ inputs.token }}
       run: |
-        gh auth login
         gh repo clone ${{ inputs.repository }} workspace
+
         cd workspace
         git switch ${{ inputs.destination }}
         git merge --ff-only ${{ inputs.source }}
-        git push -u origin ${{ inputs.destination }}
+
+        git remote set-url origin https://x-access-token:$GH_TOKEN@github.com/${{ inputs.repository }}
+        git push
